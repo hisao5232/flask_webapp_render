@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Todo</title>
+</head>
+<body>
+    <h1>Update Todo</h1>
+    <form action="/update/{{ todo.id }}" method="POST">
+        <label>Title:</label>
+        <input type="text" name="title" value="{{ todo.title }}" required><br>
+
+        <label>Description:</label>
+        <textarea name="description">{{ todo.description }}</textarea><br>
+
+        <label>Due Date:</label>
+        <input type="date" name="due_date" value="{{ todo.due_date.strftime('%Y-%m-%d') if todo.due_date else '' }}"><br>
+
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">Back to List</a>
+</body>
+</html>
