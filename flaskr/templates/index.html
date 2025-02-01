@@ -2,21 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todo List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - Global Tasks Inc.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Todo List</h1>
-    <a href="/add">Add New Todo</a>
-    <ul>
-        {% for todo in todos %}
-            <li>
-                <strong>{{ todo.title }}</strong>
-                <p>{{ todo.description }}</p>
-                <p>Due Date: {{ todo.due_date.strftime('%Y-%m-%d') if todo.due_date else 'No Due Date' }}</p>
-                <a href="/update/{{ todo.id }}">Edit</a>
-                <a href="/delete/{{ todo.id }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <header class="header">
+        <h1>Global Tasks Inc. - Todo List</h1>
+        <p class="department">Team: Project Management</p>
+    </header>
+    <main class="main-content">
+        <div class="add-todo">
+            <a href="/add" class="btn">Add New Todo</a>
+        </div>
+        <ul class="todo-list">
+            {% for todo in todos %}
+                <li class="todo-item">
+                    <strong class="todo-title">{{ todo.title }}</strong>
+                    <p class="todo-description">{{ todo.description }}</p>
+                    <p class="todo-due">Due Date: {{ todo.due_date.strftime('%Y-%m-%d') if todo.due_date else 'No Due Date' }}</p>
+                    <div class="todo-actions">
+                        <a href="/update/{{ todo.id }}" class="btn edit-btn">Edit</a>
+                        <a href="/delete/{{ todo.id }}" class="btn delete-btn">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Global Tasks Inc. All rights reserved.</p>
+    </footer>
 </body>
 </html>
