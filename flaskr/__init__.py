@@ -15,9 +15,19 @@ def create_app():
     #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
     #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    # 環境変数 `DATABASE_URL` から接続情報を取得
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
+    # Internal Database URL を使用するために `sslmode=require` を確認
+    if DATABASE_URL and "sslmode" not in DATABASE_URL:
+        DATABASE_URL += "?sslmode=require"
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
     # PostgreSQL接続設定
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    #app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
 
