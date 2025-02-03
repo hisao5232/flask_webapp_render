@@ -17,22 +17,6 @@ def create_app():
 
     DATABASE_URL = os.getenv("DATABASE_URL")
 
-    # `sslmode=disable` に設定
-    if DATABASE_URL:
-        if "sslmode" not in DATABASE_URL:
-            if "?" in DATABASE_URL:
-                DATABASE_URL += "&sslmode=disable"
-            else:
-                DATABASE_URL += "?sslmode=disable"
-
-    """# `sslmode=require` を適切に設定
-    if DATABASE_URL:
-        if "sslmode" not in DATABASE_URL:
-            if "?" in DATABASE_URL:
-                DATABASE_URL += "&sslmode=require"
-            else:
-                DATABASE_URL += "?sslmode=require"
-"""
     # Flask SQLAlchemy 設定
     app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
